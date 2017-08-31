@@ -1,20 +1,24 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 // ----------------------
-// USERS
+// SHELTERS
 // ----------------------
-const usersSchema = new mongoose.Schema({
-  // required for authentication: DO NOT TOUCH Or You May Get Punched
-  email:     { type: String, required: true },
-  password:  { type: String, required: true },
-  // x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x
-  
-   // example of optional fields
-  name:      { type: String },
-  createdAt: { type: Date, default: Date.now }
 
+const shelterSchema = new mongoose.Schema({
+  county: {type: String},
+  name: {type: String},
+  address: {type: String, required: true},
+  city: {type: String},
+  pets: {type: Boolean},
+  phone: {type: String},
+  accepting: {type: Boolean},
+  last_updated: {type: Date},
+  notes: {type: String},
+  longitude: {type: Number},
+  latitude: {type: Number},
+  createdAt: {type: Date, default: Date.now}
 })
 
 module.exports = {
-  User: mongoose.model('User', usersSchema)
+  Shelter: mongoose.model('Shelter', shelterSchema)
 }
