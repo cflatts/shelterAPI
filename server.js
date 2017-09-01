@@ -2,13 +2,11 @@ const PROJECT_NAME = 'shelterAPI'
 
 // x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x
 
-
-
-const bodyParser = require('body-parser');
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const passport = require('passport');
+const bodyParser = require('body-parser')
+const express = require('express')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const passport = require('passport')
 const renderFile = require('ejs').renderFile
 
 // Load Configuration
@@ -25,7 +23,6 @@ let apiRouter = require('./routes/apiRouter.js')
 // Load DB User Model (for appAuthentication configuration)
 let User = require('./db/schema.js').User
 
-
 // =========
 // RUN APP
 // =========
@@ -36,9 +33,9 @@ app.set('port', PORT)
 // =========
 // VIEW ENGINE
 // =========
-app.set('views', './dist/views');
+app.set('views', './dist/views')
 app.engine('html', renderFile)
-app.set('view engine', 'html');
+app.set('view engine', 'html')
 
 // =========
 // DATABASE
@@ -46,29 +43,29 @@ app.set('view engine', 'html');
 connectToDB(PROJECT_NAME)
 
 // =========
-// APPLICATION MIDDLEWARE 
+// APPLICATION MIDDLEWARE
 // =========
-app.use( express.static( __dirname + '/dist/assets') );
-app.use( bodyParser.json() );
-app.use( bodyParser.urlencoded() );
-app.use( cookieParser() );
-app.use( session({secret: appSecrets.sessionSecret }) );
-app.use( passport.initialize() );
-app.use( passport.session() );
+app.use(express.static(__dirname + '/dist/assets'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded())
+app.use(cookieParser())
+app.use(session({secret: appSecrets.sessionSecret }))
+app.use(passport.initialize())
+app.use(passport.session())
 appAuthentication(User)
-app.use( appMiddleWare.cookifyUser )
-app.use( appMiddleWare.parseQuery )
-// 
+app.use(appMiddleWare.cookifyUser)
+app.use(appMiddleWare.parseQuery)
+//
 // =========
 // ROUTERS
 // =========
 
-app.use( '/', indexRouter )
-app.use( '/auth', authRouter )
-app.use( '/api', apiRouter )
+app.use('/', indexRouter)
+app.use('/auth', authRouter)
+app.use('/api', apiRouter)
 
-app.use(appMiddleWare.errorHandler);
+app.use(appMiddleWare.errorHandler)
 
-app.listen(PORT,function() {
+app.listen(PORT, function () {
   console.log('\n\n===== listening for requests on port ' + PORT + ' =====\n\n')
 })
