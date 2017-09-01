@@ -32,7 +32,7 @@ apiRouter
     })
 
     .delete('/users/:_id', function (req, res) {
-      User.remove({ _id: req.params._id}, (err) => {
+      User.remove({_id: req.params._id}, (err) => {
         if (err) return res.json(err)
         res.json({
           msg: `record ${req.params._id} successfully deleted`,
